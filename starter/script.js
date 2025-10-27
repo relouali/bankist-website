@@ -61,8 +61,7 @@ document
     message.parentElement.removeChild(message)()
   );
 
-
-  // styles
+// styles
 
 message.style.backgroundColor = '#37383d';
 message.style.width = '120%';
@@ -75,8 +74,27 @@ message.style.height =
   Number.parseFloat(getComputedStyle(message).height) + 40 + '10px';
 console.log(getComputedStyle(message).height);
 
-
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-
 //attributes
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.getAttribute('designer'));
+console.log(logo.dataset.versionNumber);
+
+// //classes
+// logo.classList.add('');
+// logo.classList.remove('');
+// logo.classList.toggle('');
+// logo.classList.contains('');
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+  console.log('scroll X/Y', window.scrollY, scrollX);
+});
