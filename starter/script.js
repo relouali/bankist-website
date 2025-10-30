@@ -77,31 +77,57 @@ console.log(h1.querySelectorAll('.highlight'));
 h1.lastElementChild.style.color = 'white';
 h1.firstElementChild.style.color = 'black';
 
-// DOM traversing
+// tabbed component
 
-// Going upwards: parents
-console.log(h1.parentNode);
-console.log(h1.parentElement);
+// all tabs
+const tabs = document.querySelectorAll('.operations__tab');
 
-h1.closest('.header').style.background = 'var(--gradient-secondary)';
+const tabsContainer = document.querySelector('.operations__tab-container');
 
-// Going sideways: siblings
-console.log(h1.previousElementSibling);
-console.log(h1.nextElementSibling);
+const tabsContent = document.querySelectorAll('.operations__content');
 
-console.log(h1.previousSibling);
-console.log(h1.nextSibling);
-console.log(h1.parentElement.children);
+// event handler for individual tabs
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  if (!clicked) return;
 
-[...h1.parentElement.children].forEach(function (el) {
-  if (el !== h1) {
-    el.style.transform = 'scale(0.5)';
-  }
+  // Active Tab
+  tabs.forEach(el => el.classList.remove('operations__tab--active'));
+
+  clicked.classList.add('operations__tab--active');
+
+  // Activate content area
+  tabsContent.forEach(el => el.classList.remove('operations__content--active'));
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add(`operations__content--active`);
 });
 
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 ////////////////////////////////////////////
+
+// DOM traversing
+
+// // Going upwards: parents
+// console.log(h1.parentNode);
+// console.log(h1.parentElement);
+
+// h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// // Going sideways: siblings
+// console.log(h1.previousElementSibling);
+// console.log(h1.nextElementSibling);
+
+// console.log(h1.previousSibling);
+// console.log(h1.nextSibling);
+// console.log(h1.parentElement.children);
+
+// [...h1.parentElement.children].forEach(function (el) {
+//   if (el !== h1) {
+//     el.style.transform = 'scale(0.5)';
+//   }
+// });
 
 // console.log(document.documentElement);
 // console.log(document.head);
