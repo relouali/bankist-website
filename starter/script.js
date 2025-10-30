@@ -48,6 +48,60 @@ btnScrollTo.addEventListener('click', function (e) {
 
 //////////////////////////////////
 // page navigation
+// document.querySelectorAll('.nav__link').forEach(function (el) {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+//     console.log('CLICK');
+//     const id = this.getAttribute('href');
+
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// 1. Add event listener to common parent element
+// 2. Determine what element orginated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (e.target.classList.contains('nav__link')) {
+    document
+      .querySelector(e.target.getAttribute('href'))
+      .scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+const h1 = document.querySelector('h1');
+
+console.log(h1.querySelectorAll('.highlight'));
+h1.lastElementChild.style.color = 'white';
+h1.firstElementChild.style.color = 'black';
+
+// DOM traversing
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+console.log(h1.parentElement.children);
+
+[...h1.parentElement.children].forEach(function (el) {
+  if (el !== h1) {
+    el.style.transform = 'scale(0.5)';
+  }
+});
+
+////////////////////////////////////////////
+////////////////////////////////////////////
+////////////////////////////////////////////
 
 // console.log(document.documentElement);
 // console.log(document.head);
