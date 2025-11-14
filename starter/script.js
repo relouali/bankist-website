@@ -240,3 +240,32 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //   this.style.backgroundColor = randomColor();
 //   console.log('NAV', e.target, e.currentTarget);
 // });
+
+// Sticky navigation
+const initialCoords = section1.getBoundingClientRect();
+// console.log(initialCoords);
+
+window.addEventListener('scroll', function (e) {
+  // console.log(window.scrollY);
+
+  if (window.scrollY > initialCoords.top) {
+    nav.classList.add('sticky');
+    // console.log(initialCoords);
+  } else {
+    nav.classList.remove('sticky');
+  }
+});
+
+const obsCallback = function (entries, observer) {
+  entries.forEach(entry => {
+    console.log(entry);
+  });
+};
+
+const obsOptions = {
+  root: null,
+  treshold: 0.1,
+};
+
+const observer = new IntersectionObserver(obsCallback, obsOptions);
+observer.observe(section1);
