@@ -257,15 +257,16 @@ window.addEventListener('scroll', function (e) {
 });
 
 const obsCallback = function (entries, observer) {
+  // IntersectionObsever wordt automatisch met 2 argumenten gecalled
   entries.forEach(entry => {
     console.log(entry);
   });
 };
 
 const obsOptions = {
-  root: null,
+  root: null, //default viewport
   treshold: 0.1,
 };
 
-const observer = new IntersectionObserver(obsCallback, obsOptions);
-observer.observe(section1);
+const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide met 2 argumenten
+observer.observe(section1); // functie invoken zodat de obsCallback functie wordt uitgeropen met obsOtions wanneer section 1 kruist (intersect) met de root
