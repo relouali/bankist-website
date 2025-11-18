@@ -241,32 +241,46 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 //   console.log('NAV', e.target, e.currentTarget);
 // });
 
-// Sticky navigation
-const initialCoords = section1.getBoundingClientRect();
-// console.log(initialCoords);
+// // Sticky navigation
+// const initialCoords = section1.getBoundingClientRect();
+// // console.log(initialCoords);
 
-window.addEventListener('scroll', function (e) {
-  // console.log(window.scrollY);
+// window.addEventListener('scroll', function (e) {
+//   // console.log(window.scrollY);
 
-  if (window.scrollY > initialCoords.top) {
-    nav.classList.add('sticky');
-    // console.log(initialCoords);
-  } else {
-    nav.classList.remove('sticky');
-  }
-});
+//   if (window.scrollY > initialCoords.top) {
+//     nav.classList.add('sticky');
+//     // console.log(initialCoords);
+//   } else {
+//     nav.classList.remove('sticky');
+//   }
+// });
+
+// const obsCallback = function (entries, observer) {
+//   // IntersectionObsever wordt automatisch met 2 argumenten gecalled
+//   entries.forEach(entry => {
+//     console.log(entry);
+//   });
+// };
+
+// const obsOptions = {
+//   root: null, //default viewport
+//   treshold: 0.1,
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide met 2 argumenten
+// observer.observe(section1); // functie invoken zodat de obsCallback functie wordt uitgeropen met obsOtions wanneer section 1 kruist (intersect) met de root
 
 const obsCallback = function (entries, observer) {
-  // IntersectionObsever wordt automatisch met 2 argumenten gecalled
   entries.forEach(entry => {
     console.log(entry);
   });
 };
 
 const obsOptions = {
-  root: null, //default viewport
-  treshold: 0.1,
+  root: null,
+  threshold: [0.1, 0.3], // tresholds wanneer de gebruiker in view scrollt en uit de view scrollt
 };
 
-const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide met 2 argumenten
+const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide (new intersectionObserver) met 2 argumenten
 observer.observe(section1); // functie invoken zodat de obsCallback functie wordt uitgeropen met obsOtions wanneer section 1 kruist (intersect) met de root
