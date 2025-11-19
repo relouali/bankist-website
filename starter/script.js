@@ -271,16 +271,36 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide met 2 argumenten
 // observer.observe(section1); // functie invoken zodat de obsCallback functie wordt uitgeropen met obsOtions wanneer section 1 kruist (intersect) met de root
 
-const obsCallback = function (entries, observer) {
-  entries.forEach(entry => {
-    console.log(entry);
-  });
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => {
+//     console.log(entry.isVisible);
+//   });
+// };
+
+// const obsOptions = {
+//   root: null, //root is gehele viewport
+//   threshold: [0.1, 0.3], // tresholds wanneer de gebruiker in view scrollt en uit de view scrollt
+// };
+
+// const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide (new intersectionObserver) met 2 argumenten
+// observer.observe(section1); // functie invoken zodat de obsCallback functie wordt opgeropen met obsOtions wanneer section 1 kruist (intersect) met de root(viewport)
+
+const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
+console.log(navHeight);
+const stickyNav = function (entries) {
+  const [entry] = entries; // entries[0] opslaan als entry
+
+  if (!entry.isIntersecting) {
+    nav.classList.add('sticky');
+  } else {
+    nav.classList.remove('sticky');
+  }
 };
 
-const obsOptions = {
+const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
-  threshold: [0.1, 0.3], // tresholds wanneer de gebruiker in view scrollt en uit de view scrollt
-};
-
-const observer = new IntersectionObserver(obsCallback, obsOptions); // obsCallback word door de browser API geprovide (new intersectionObserver) met 2 argumenten
-observer.observe(section1); // functie invoken zodat de obsCallback functie wordt uitgeropen met obsOtions wanneer section 1 kruist (intersect) met de root
+  threshold: 0,
+  rootMargin: `-${navHeight}px`, // 90 pixels voordat de de intersection false is (om eerder de nav te tonen)
+});
+headerObserver.observe(header);
