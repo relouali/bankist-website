@@ -286,9 +286,8 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 // observer.observe(section1); // functie invoken zodat de obsCallback functie wordt opgeropen met obsOtions wanneer section 1 kruist (intersect) met de root(viewport)
 
 const header = document.querySelector('.header');
-const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
-const stickyNav = function (entries) {
+const navHeight = nav.getBoundingClientRect().height; //hoogte ophalen van de nav op basis van de viewport
+const stickyNav = function (entries, observer) {
   const [entry] = entries; // entries[0] opslaan als entry
 
   if (!entry.isIntersecting) {
@@ -304,3 +303,22 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`, // 90 pixels voordat de de intersection false is (om eerder de nav te tonen)
 });
 headerObserver.observe(header);
+
+// Reveal sections
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(function (section) {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
