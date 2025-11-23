@@ -438,5 +438,9 @@ const slider = function () {
 slider();
 
 document.addEventListener('DOMContentLoaded', function (e) {
-  console.log('html parsed');
+  console.log('HTML parsed and DOM Tree built!', e);
+});
+
+window.addEventListener('load', function (e) {
+  console.log('page fully loaded', e);
 });
